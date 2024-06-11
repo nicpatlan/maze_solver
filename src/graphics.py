@@ -30,6 +30,9 @@ class Point():
         self.x = x
         self.y = y
 
+    def __repr__(self):
+        return f'Point({self.x}, {self.y})'
+
 class Line():
     def __init__(self, p1, p2):
         self.__p1 = p1
@@ -72,3 +75,12 @@ class Cell():
             if self.has_top_wall:
                 line = Line(self.__p_upper_l, p_upper_r)
                 self.__win.draw_line(line, "black")
+
+    def center(self):
+        x = self.__p_upper_l.x + (self.__p_lower_r.x - self.__p_upper_l.x)
+        y = self.__p_upper_l.y + (self.__p_lower_r.y - self.__p_upper_l.y)
+        return Point(x, y)
+
+    def draw_move(self, to_cell, undo=False):
+        fill_color = "gray" if undo else "red"
+        self.__win.draw_line(Line(self.center(), to_cell.center()), fill_color)

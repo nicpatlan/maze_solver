@@ -38,6 +38,12 @@ def main():
     for cell in cells:
         cell.draw() 
 
+    for i in range(5, 0, -1):
+        cells[i].draw_move(cells[i - 1])
+
+    for i in range(5, 9):
+        cells[i].draw_move(cells[i + 1], undo=True)
+
     win.wait_for_close()
 
 main()
