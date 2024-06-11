@@ -1,4 +1,5 @@
-from graphics import Window, Point, Line, Cell
+from graphics import Window, Point, Line 
+from cell import Cell
 
 def main():
     max_width = 800
