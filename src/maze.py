@@ -17,9 +17,9 @@ class Maze():
         self.__cell_size_y = cell_size_y
         self.__win = win
         self.__cells = []
-        self._create_and_draw_cells()
+        self._create_cells()
 
-    def _create_and_draw_cells(self):
+    def _create_cells(self):
         for x in range(1, self.__num_cols + 1):
             self.__cells.append([])
             lower_right_x = self.__upper_left_point.x + (self.__cell_size_x * x)
@@ -31,9 +31,14 @@ class Maze():
                 lower_right_point = Point(lower_right_x, lower_right_y)
                 cell = Cell(self.__win, upper_left_point, lower_right_point)
                 self.__cells[x - 1].append(cell)
-                cell.draw()
-                self.__win.redraw()
-                self._animate()
+                self._draw_cell(cell)
+
+    def _draw_cell(self, cell):
+        if self.__win is None:
+            return
+        cell.draw()
+        self.__win.redraw()
+        self._animate()
 
     def _animate(self):
         self.__win.redraw()
