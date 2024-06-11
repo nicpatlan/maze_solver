@@ -1,40 +1,42 @@
 from graphics import Line, Point
 
 class Cell():
-    def __init__(self, win, p1, p2):
-        self.__win = win
+    def __init__(self, p1, p2, win=None):
+        self._win = win
         self.has_left_wall = True
         self.has_right_wall = True
         self.has_top_wall = True
         self.has_bottom_wall = True
-        self.__p_upper_l = p1
-        self.__p_lower_r = p2
+        self._p_upper_l = p1
+        self._p_lower_r = p2
 
     def draw(self):
+        if self._win == None:
+            return
         if self.has_left_wall or self.has_bottom_wall:
-            p_lower_l = Point(self.__p_upper_l.x,
-                          self.__p_lower_r.y)
+            p_lower_l = Point(self._p_upper_l.x,
+                          self._p_lower_r.y)
             if self.has_left_wall:
-                line = Line(self.__p_upper_l, p_lower_l)
-                self.__win.draw_line(line, "black")
+                line = Line(self._p_upper_l, p_lower_l)
+                self._win.draw_line(line, "black")
             if self.has_bottom_wall:
-                line = Line(p_lower_l, self.__p_lower_r)
-                self.__win.draw_line(line, "black") 
+                line = Line(p_lower_l, self._p_lower_r)
+                self._win.draw_line(line, "black") 
         if self.has_right_wall or self.has_top_wall:
-            p_upper_r = Point(self.__p_lower_r.x, 
-                          self.__p_upper_l.y)
+            p_upper_r = Point(self._p_lower_r.x, 
+                          self._p_upper_l.y)
             if self.has_right_wall:            
-                line = Line(p_upper_r, self.__p_lower_r)
-                self.__win.draw_line(line, "black")
+                line = Line(p_upper_r, self._p_lower_r)
+                self._win.draw_line(line, "black")
             if self.has_top_wall:
-                line = Line(self.__p_upper_l, p_upper_r)
-                self.__win.draw_line(line, "black")
+                line = Line(self._p_upper_l, p_upper_r)
+                self._win.draw_line(line, "black")
 
     def center(self):
-        x = self.__p_upper_l.x + (self.__p_lower_r.x - self.__p_upper_l.x)
-        y = self.__p_upper_l.y + (self.__p_lower_r.y - self.__p_upper_l.y)
+        x = self._p_upper_l.x + (self._p_lower_r.x - self._p_upper_l.x)
+        y = self._p_upper_l.y + (self._p_lower_r.y - self._p_upper_l.y)
         return Point(x, y)
 
     def draw_move(self, to_cell, undo=False):
         fill_color = "gray" if undo else "red"
-        self.__win.draw_line(Line(self.center(), to_cell.center()), fill_color)
+        self._win.draw_line(Line(self.center(), to_cell.center()), fill_color)
