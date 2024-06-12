@@ -9,6 +9,7 @@ class Cell():
         self.has_bottom_wall = True
         self._p_upper_l = p1
         self._p_lower_r = p2
+        self.visited = False
 
     def draw(self):
         if self._win == None:
