@@ -33,6 +33,14 @@ class Tests(unittest.TestCase):
         exit_wall = (not (exit_cell.has_right_wall and
                           exit_cell.has_bottom_wall))
         self.assertEqual(True, (ent_wall and exit_wall))
+
+    def test_maze_reset_visited(self):
+        num_cols = 10
+        num_rows = 10
+        m1 = Maze(Point(0, 0), num_rows, num_cols, 10, 10)
+        for col in m1._cells:
+            for cell in col:
+                self.assertEqual(False, cell.visited)
  
 if __name__ == "__main__":
     unittest.main()

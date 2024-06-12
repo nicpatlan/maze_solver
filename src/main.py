@@ -10,6 +10,7 @@ def main():
     win = Window(max_width, max_height)
     seed = random.randrange(1000)
     maze = Maze(Point(30, 30), 11, 15, 50, 50, win, seed)
+    maze.solve()
 
     win.wait_for_close()
 

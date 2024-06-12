@@ -32,10 +32,10 @@ class Cell():
         self._win.draw_line(Line(p_lower_l, self._p_lower_r), wall_color)
 
     def center(self):
-        x = self._p_upper_l.x + (self._p_lower_r.x - self._p_upper_l.x)
-        y = self._p_upper_l.y + (self._p_lower_r.y - self._p_upper_l.y)
+        x = self._p_upper_l.x + abs(self._p_upper_l.x - self._p_lower_r.x) // 2
+        y = self._p_upper_l.y + abs(self._p_upper_l.y - self._p_lower_r.y) // 2
         return Point(x, y)
 
     def draw_move(self, to_cell, undo=False):
-        fill_color = "gray" if undo else "red"
+        fill_color = "gray" if not undo else "red"
         self._win.draw_line(Line(self.center(), to_cell.center()), fill_color)
