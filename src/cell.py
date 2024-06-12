@@ -13,24 +13,22 @@ class Cell():
     def draw(self):
         if self._win == None:
             return
-        if self.has_left_wall or self.has_bottom_wall:
-            p_lower_l = Point(self._p_upper_l.x,
+        p_lower_l = Point(self._p_upper_l.x,
                           self._p_lower_r.y)
-            if self.has_left_wall:
-                line = Line(self._p_upper_l, p_lower_l)
-                self._win.draw_line(line, "black")
-            if self.has_bottom_wall:
-                line = Line(p_lower_l, self._p_lower_r)
-                self._win.draw_line(line, "black") 
-        if self.has_right_wall or self.has_top_wall:
-            p_upper_r = Point(self._p_lower_r.x, 
+        p_upper_r = Point(self._p_lower_r.x,
                           self._p_upper_l.y)
-            if self.has_right_wall:            
-                line = Line(p_upper_r, self._p_lower_r)
-                self._win.draw_line(line, "black")
-            if self.has_top_wall:
-                line = Line(self._p_upper_l, p_upper_r)
-                self._win.draw_line(line, "black")
+
+        wall_color = "black" if self.has_left_wall else "white"
+        self._win.draw_line(Line(self._p_upper_l, p_lower_l), wall_color)
+
+        wall_color = "black" if self.has_right_wall else "white"
+        self._win.draw_line(Line(p_upper_r, self._p_lower_r), wall_color)
+
+        wall_color = "black" if self.has_top_wall else "white"
+        self._win.draw_line(Line(self._p_upper_l, p_upper_r), wall_color)
+
+        wall_color = "black" if self.has_bottom_wall else "white"
+        self._win.draw_line(Line(p_lower_l, self._p_lower_r), wall_color)
 
     def center(self):
         x = self._p_upper_l.x + (self._p_lower_r.x - self._p_upper_l.x)
