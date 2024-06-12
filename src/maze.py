@@ -50,10 +50,16 @@ class Maze():
 
     def _break_entrance_and_exit(self):
         ent_cell = self._cells[0][0]
-        ent_cell.has_top_wall = False
+        if random.randrange(1) == 0:
+            ent_cell.has_top_wall = False
+        else:
+            ent_cell.has_left_wall = False
         self._draw_cell(ent_cell)
         exit_cell = self._cells[self._num_cols - 1][self._num_rows - 1]
-        exit_cell.has_bottom_wall = False
+        if random.randrange(1) == 0:
+            exit_cell.has_bottom_wall = False
+        else:
+            exit_cell.has_right_wall = False
         self._draw_cell(exit_cell)
 
     def _break_walls_r(self, col, row):
